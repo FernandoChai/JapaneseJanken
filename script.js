@@ -2,6 +2,12 @@ const playBtn = document.querySelector("button");
 const content = document.getElementById("content");
 
 playBtn.addEventListener("click", function () {
+  //background song
+  const backgroundAudio = new Audio("Assets/background-music.mp3");
+  backgroundAudio.play();
+  backgroundAudio.loop = true;
+  backgroundAudio.volume = 0.3;
+
   this.remove();
   content.classList.add("content");
   content.innerHTML =
@@ -45,14 +51,18 @@ playBtn.addEventListener("click", function () {
   }
 
   function compAnimation() {
+    const audioEffect = new Audio("Assets/effect-1.mp3");
     const compImg = document.querySelector("#computerChoice img");
     var i = 0;
     var time = new Date().getTime();
     setInterval(function () {
       if (new Date().getTime() - time > 1000) {
         clearInterval;
+        audioEffect.pause();
+        audioEffect.currentTime = 0;
         return;
       }
+      audioEffect.play();
       compImg.setAttribute("src", "Assets/" + gameChoices[i++] + ".png");
       if (i == gameChoices.length) i = 0;
     }, 100);
